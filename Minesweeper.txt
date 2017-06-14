@@ -26,7 +26,6 @@ class Minesweeper {
   }
 
   nextTurn() {
-    this.printBoard('gameBoard');
     prompt.getAsync(['row', 'column'])
       .then(result => {
         let {row, column} = result;
@@ -34,17 +33,15 @@ class Minesweeper {
         let columnIndex = column - 1;
         this.placeMarker(rowIndex, columnIndex);
         if (this.gameLost) {
-          return console.log('Game over! You lose :(');
+          throw new Error('Game over!');
         }
         this.revealAdjacentSpots(rowIndex, columnIndex);
-        if (this.checkIfWinner()) {
-          return console.log('Congratulations, you\'ve won!');
-          // throw new Error('Winner');
-        }
+        this.printBoard('gameBoard');
         this.nextTurn();
       })
       .catch(err => {
-        return console.error('turn error!', err);
+        if (err === 'Game over!') console.log('Game over! You lose');
+        console.error('turn error!', err);
       });
   }
 
@@ -77,21 +74,21 @@ class Minesweeper {
   }
 
   updateBombBoard() {
-    for (var i = 0; i < this.columns; i++) {
-      for (var j = 0; j < this.rows; j++) {
+    for (var i = 0; i < this.rows; i++) {
+      for (var j = 0; j < this.columns; j++) {
         if (this.bombBoard[j][i] !== 'B') {
           var count = this.getAdjacentCount(j, i);
           this.bombBoard[j][i] = count > 0 ? `${count}` : '.'; 
         }
       }
     }
-    // this.printBoard('bombBoard');
+    this.printBoard('bombBoard');
   }
 
   createBoard(boardToCreate, placeholder = '.') {
     let { rows, columns, bombs } = this;
     this[boardToCreate] = new Array(rows).fill(0).map(row => new Array(columns).fill(placeholder));
-    // this.printBoard(boardToCreate);
+    this.printBoard(boardToCreate);
 
   }
 
@@ -110,59 +107,37 @@ class Minesweeper {
       }
     }
 
-    // this.printBoard(board);
+    console.log('BOMBS PLACED');
+    this.printBoard(board);
   }
 
   placeMarker(row, column) {
     if (this.bombBoard[row][column] === 'B') {
+      console.log('You lose!');
       this.gameLost = true;
     }
   }
 
   checkIfWinner() {
     // To be implemented by checking if gameboard has any remaining H's, assuming player has not lost yet
-    var count = 0;
-    for (var i = 0; i < this.columns; i++) {
-      for (var j = 0; j < this.rows; j++) {
-        if (this.gameBoard[j][i] === 'H' && this.bombBoard[j][i] !== 'B') count++;
-      }
-    }
-    return count === 0;
   }
 
   revealAdjacentSpots(row, column) {
     // With more time I would clean this up
-
-    var stack = [];
-    stack.push([row, column]);
-
-    while (stack.length) {
-      let [currentRow, currentColumn] = stack.pop();
-      let insideBoard = (currentRow >= 0 && currentRow < this.rows && currentColumn >= 0 && currentColumn < this.columns);
-      // console.log(insideBoard);
-      if (!insideBoard) continue;
-      
-      if (this.bombBoard[currentRow][currentColumn] === 'B') {
-        continue;  
-      }
-
-      if (!isNaN(parseInt(this.gameBoard[currentRow][currentColumn], 10))) continue;
-      if (this.gameBoard[currentRow][currentColumn] === '.') continue;
-
-      if (this.bombBoard[currentRow][currentColumn] !== '.') {
-        this.gameBoard[currentRow][currentColumn] = this.bombBoard[currentRow][currentColumn];
-      } else {
-        this.gameBoard[currentRow][currentColumn] = '.';
-        stack.push([currentRow - 1, currentColumn - 1]);
-        stack.push([currentRow - 1, currentColumn]);
-        stack.push([currentRow - 1, currentColumn + 1]);
-        stack.push([currentRow, currentColumn - 1]);
-        stack.push([currentRow, currentColumn + 1]);
-        stack.push([currentRow + 1, currentColumn - 1]);
-        stack.push([currentRow + 1, currentColumn]);
-        stack.push([currentRow + 1, currentColumn + 1]);
-      }
+    var insideBoard = (row >= 0 || row < this.rows || column >= 0 || column < this.columns);
+    if (!insideBoard) return;
+    if (this.bombBoard[row][column] !== '.') this.gameBoard[row][column] = this.bombBoard[row][column];
+    if (this.bombBoard[row][column] === '.') {
+      this.revealAdjacentSpots(row - 1, column - 1);
+      this.revealAdjacentSpots(row - 1, column);
+      this.revealAdjacentSpots(row - 1, column + 1);
+      this.revealAdjacentSpots(row, column - 1);
+      this.revealAdjacentSpots(row, column + 1);
+      this.revealAdjacentSpots(row + 1, column - 1);
+      this.revealAdjacentSpots(row + 1, column);
+      this.revealAdjacentSpots(row + 1, column + 1);
     }
+    return;
   }
 
   getAdjacentCount(row, column) {
