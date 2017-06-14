@@ -1,0 +1,24 @@
+{
+  "name": "liftoff_command_line",
+  "version": "1.0.0",
+  "description": "Command line program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mike26372/command_line_prompt.git"
+  },
+  "author": "Michael Tutt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mike26372/command_line_prompt/issues"
+  },
+  "homepage": "https://github.com/Mike26372/command_line_prompt#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "fs": "0.0.1-security",
+    "prompt": "^1.0.0"
+  }
+}
