@@ -23,8 +23,9 @@ class Minesweeper {
 
   printBoard(boardToPrint) {
     var columns = this[boardToPrint][0].length;
+    console.log('  ' + Array.from(new Array(columns), (val, ind) => ind + 1).join(' '));
     this[boardToPrint].forEach((col, ind) => {
-      console.log(`${col.join(' ')}\n`);
+      console.log(`${ind} ${col.join(' ')}\n`);
     });
   }
 
@@ -41,51 +42,16 @@ class Minesweeper {
 
       this[boardToCreate] = new Array(rows).fill(0).map(row => new Array(columns).fill('.'));
       this.printBoard('bombBoard');
+      this.placeBombs(bombs);
     });
 
   }
 
-  placeBombs() {
+  placeBombs(numBombs) {
 
   }
 
-  // getNumber() {
-  //   let numberSchema = [
-  //     {name: 'number', description: 'Please enter an number', type: 'integer'}
-  //   ];
-
-
-  //   prompt.getAsync(numberSchema)
-  //     .then(result => {
-  //       let {number} = result;
-  //       let randomNum = Math.floor(Math.random() * 10);
-  //       let message = `Your number was: ${number}\nA random number is: ${randomNum}\nThese numbers added together is: ${number + randomNum}`;
-  //       console.log(message);
-  //       return this.isNumberEven(number + randomNum);
-  //     })
-  //     .then(result => {
-  //       var message = `The number is ${result ? '' : 'not '}even`;
-  //       console.log(message);
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // }
-
-  isNumberEven(number) {
-    var result = false;
-    return new Promise((resolve, reject) => {
-      if (number % 2 === 0) {
-        result = true;
-      }
-      resolve(result);
-    });
-  }
-
-  logModule() {
-    console.log(key);
-  }
 
 }
 
-var program = new Minesweeper();
+var minesweeper = new Minesweeper();
