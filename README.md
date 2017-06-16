@@ -1,11 +1,11 @@
-#Minesweeper
+# Minesweeper
 For this interview, you'll be implementing a simple, console based version of the classic Windows game Minesweeper. You’ll have 1 hour 30 minutes. At the end of this time, we would like to see a fully functional game with no bugs.
 Game Rules
 Take a few minutes to play around with this online implementation:
 ```
     http://minesweeperonline.com/#beginner
 ```
-The rules are pretty simple:
+### The rules are pretty simple:
  
 The game is played on a rectangular grid of tiles. Some of these tiles contain bombs. At the start of the game, the contents of each tile are hidden from the player.
 The player select a tiles, one at a time, to reveal what is hidden underneath them:
@@ -30,16 +30,12 @@ Repeat.
  
 You can use the following ASCII characters to represent the different states of the board:
  
-Character
-Meaning
-H
-A tile which has not yet been revealed.
-.
-A revealed tile which doesn’t contain a bomb, nor is it adjacent to any tiles containing bombs.
-1-8
-A revealed tile which is adjacent to 1-8 bombs.
-B
-A revealed tile which contains a bomb. This is only used when the game board is printed for the final time, after the player wins or loses.
+Character | Meaning
+--- | ---
+H | A tile which has not yet been revealed.
+. | A revealed tile which doesn’t contain a bomb, nor is it adjacent to any tiles containing bombs.
+1-8 | A revealed tile which is adjacent to 1-8 bombs.
+B | A revealed tile which contains a bomb. This is only used when the game board is printed for the final time, after the player wins or loses.
  
 To make the game a bit easier to play, you should print out row and column indices at the top and left of the board, and you should pad each column with a few spaces for readability.
  
