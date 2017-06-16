@@ -1,10 +1,10 @@
-Minesweeper
+#Minesweeper
 For this interview, you'll be implementing a simple, console based version of the classic Windows game Minesweeper. You’ll have 1 hour 30 minutes. At the end of this time, we would like to see a fully functional game with no bugs.
 Game Rules
 Take a few minutes to play around with this online implementation:
- 
+```
     http://minesweeperonline.com/#beginner
- 
+```
 The rules are pretty simple:
  
 The game is played on a rectangular grid of tiles. Some of these tiles contain bombs. At the start of the game, the contents of each tile are hidden from the player.
@@ -20,10 +20,10 @@ You should implement a console version of this game - no need to build a graphic
  
 Display the board
 Read a row/column from the player via the command line. For example:
- 
-        prompt> Enter a row: _
-        prompt> Enter a column: _
- 
+```
+  prompt> Enter a row: _
+  prompt> Enter a column: _
+```
 Update the state of the game board and exit if the player has lost or won.
 If the game ends on this iteration, the board should be printed a final time revealing the locations of all bombs.
 Repeat.
@@ -74,23 +74,25 @@ Revealing Empty Tiles
 If the user selects a tile which does not contain a bomb, nor is it adjacent to any bombs, the game should expand the set of tiles revealed outward until it reaches tiles which are adjacent to bombs.
  
 For example, given a 5x5 board with the following bomb placement, and a tile at position [2, 4]:
- 
+```
      1  2  3  4  5
   1  .  B  .  .  .
   2  .  B  .  X  .
   3  .  .  .  .  .
   4  .  .  .  .  .
   5  .  .  B  .  .
+```
  
 If no tiles are currently revealed, and the user selects the tile at position X, the new game state visible to the player should be:
- 
+```
      1  2  3  4  5
   1  H  H  2  .  .
   2  H  H  2  .  .
   3  H  H  1  .  .
   4  H  H  1  1  .
   5  H  H  H  1  .
- 
+```
+
 Note that the outermost ring of revealed tiles are those that are adjacent to bombs. Don’t stop the auto-expansion one level early and reveal only “.” tiles
 Implementation Notes
 It should be trivial to change the number of rows and columns in the initial game board, as well as the number of bombs placed at game start (either via a cmd line argument or by changing a constant).
