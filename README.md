@@ -44,7 +44,7 @@ A revealed tile which contains a bomb. This is only used when the game board is 
 To make the game a bit easier to play, you should print out row and column indices at the top and left of the board, and you should pad each column with a few spaces for readability.
  
 For example, given an 8x8 game board with 6 randomly placed bombs:
- 
+```
      1  2  3  4  5  6  7  8
   1  .  .  .  .  B  .  .  .
   2  .  .  .  .  .  .  .  .
@@ -54,9 +54,11 @@ For example, given an 8x8 game board with 6 randomly placed bombs:
   6  .  .  .  .  .  .  .  .
   7  B  .  .  .  .  .  .  .
   8  .  .  .  .  .  .  .  .
+```
  
 This board might be rendered at some point in the game like this:
- 
+
+```
      1  2  3  4  5  6  7  8
   1  H  H  H  1  H  1  .  .
   2  H  1  1  2  1  1  .  .
@@ -66,6 +68,7 @@ This board might be rendered at some point in the game like this:
   6  2  2  1  1  2  2  1  .
   7  H  1  .  .  .  .  .  .
   8  1  .  .  .  .  .  .  .
+```
  
 Revealing Empty Tiles
 If the user selects a tile which does not contain a bomb, nor is it adjacent to any bombs, the game should expand the set of tiles revealed outward until it reaches tiles which are adjacent to bombs.
