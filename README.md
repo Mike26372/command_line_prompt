@@ -111,13 +111,14 @@ The ability to easily change the dimensions of the board and number of bombs (pr
 The auto-expand feature when a user selects a tile that is not adjacent to any bombs.
 Here is a short demo of how the game should work (we show both a win and a loss):
  
-Extra Credit
+### Extra Credit
+
 If you find yourself with extra time, the original Minesweeper game has a few additional features:
  
 The first selected square would never be a bomb, nor would it be adjacent to one.
 You can “flag” tiles that you think may have a bomb to help you keep track; these tiles would not be auto-expanded. If you implement this, feel free to modify the input scheme as you see fit.
 Numbers are printed in different (but consistent) colors.
  
-You'll have 1 hour 30 minutes to complete this exercise. Good luck!
+###### You'll have 1 hour 30 minutes to complete this exercise. Good luck!
  
  
